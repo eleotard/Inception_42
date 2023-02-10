@@ -1,0 +1,114 @@
+METTRE EN PLACE UNE MINI INFRASTRUCTURE DE DIFF SERVICES
+chaque service correspond a une image Docker
+
+PROJET A REALISER DS UNE MACHINE VIRTUELLE
+
+---------------------------------------------------------------
+
+une IMAGE DOCKER c'est un dossier
+dans le dossier il y obligatoirement le Dockerfile
+
+---------------------------------------------------------------
+
+Mots a l'interieur du dockerfile:
+
+FROM -> indique l'OS de la VM (debian:buster)
+	premier mot cle
+	obligatoire
+RUN -> executer des commandes dans la VM
+	RUN apt-get update
+	apk
+	MAJ des ressources de la VM
+	installer cim, curl, sudo
+
+CMD	tail -f
+
+COPY -> mettre des fichiers ds la VM
+	juste dire ou sont les fichiers qu'on veut prendre a partir
+	du repertoire ou est le DF
+EXPOSE -> specifier les ports sur lesquels ecoute le conteneur
+	le port est dispo que pr la communication entre les 
+		containers
+ENTRYPOINT ->
+
+---------------------------------------------------------------
+
+.env dans /srcs -> stocker les variable d'environnement
+(utile pour stocker les MDP ou autres)
+
+ex:
+DOMAIN_NAME=eleotard.42.fr
+# certificates
+CERTS_=./XXXXXXXXXXXX
+# MYSQL SETUP
+MYSQL_ROOT_PASSWORD=XXXXXXXXXXXX
+MYSQL_USER=XXXXXXXXXXXX
+MYSQL_PASSWORD=XXXXXXXXXXXX
+[...]
+
+---------------------------------------------------------------
+VOLUMES
+
+2 volumes crees et accessibles depuis /home/eleotard/data
+	volume DB:			base de donnees WP
+	volume WordPress:	fichiers du site WP
+
+---------------------------------------------------------------
+VOLUME DB
+Base de donnees
+
+2 utilisateurs a creer:
+	- Admin (username qui ne doit pas etre "admin")
+	- Standard
+
+---------------------------------------------------------------
+
+NGINX :
+	serveur web pour un site internet par exemple
+	unique point d'entree de l'infrastructure
+	entree avec protocole TLSv1.2 ou TLSv1.3
+	entree port 443
+
+MARIA_DB : database 
+
+---------------------------------------------------------------
+
+YALM .ylm
+
+doit FORCEMENT commencer par la version actuelle de Compose
+	ex: "version: "_""
+
+services: //diff services a utiliser
+nginx: 
+	build: "chemin de l'image"
+	env_file: .env
+	container_name:
+	ports:
+		- "80:80"
+	restart: always 
+	//sujet: "vos containers devront redemarrer en cas de crash"
+
+----> donne les instructions a Compose pour gerer les images
+
+---------------------------------------------------------------
+
+DOCKER-NETWORK
+fait le lien entre les containers
+
+---------------------------------------------------------------
+COMMANDES DOCKER
+
+docker exec :
+execute une commande dans un container en train de tourner
+(ca ouvre un terminal dans le container)
+
+docker build srcs/requirements/nginx
+
+---------------------------------------------------------------
+VM
+
+debian sans interface graphique
+ajouter un petit window manager a la fin
+OU sinon installer LXDE (GUI le plus leger)
+
+
