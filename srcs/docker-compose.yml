@@ -1,0 +1,6 @@
+version: "20.10.5"
+
+services:
+  nginx:
+    build: requirements/nginx
+
