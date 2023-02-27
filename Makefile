@@ -4,6 +4,10 @@
 all:
 	docker-compose -f srcs/docker-compose.yml up
 
+nginx:
+	docker build -t srcs_nginx srcs/requirements/nginx
+	docker run --name nginx -it srcs_nginx
+
 stop:
 	docker-compose -f srcs/docker-compose.yml down
 
@@ -14,6 +18,7 @@ clean:
 
 cnginx:
 	docker rm nginx
+	docker rmi srcs_nginx
 
 cmdb:
 	docker rm mariadb
