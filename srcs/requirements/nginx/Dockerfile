@@ -27,5 +27,5 @@ EXPOSE	443
 
 #RUN LE SERVEUR
 
-#CMD	["nginx", "-g", "daemon off;"]
+CMD	["nginx", "-g", "daemon off;"]
 

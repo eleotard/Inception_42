@@ -2,9 +2,24 @@ version: '3'
 
 services:
   nginx:
-    build: requirements/nginx
-    ports:
-      - 80:80
-      - 443:443
+    image: nginx:latest
     container_name: nginx
-
+    restart: always
+    ports:
+      - 443:443
+    volumes:
+      -website:/var/www/html 
+    networks:
+      network:
+        aliases:
+          - "eleotard.42.fr"
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    volumes:
+      - data-base:/var/lib/mysql
+    env_file:
+        - .env
+    networks:
+      - network
