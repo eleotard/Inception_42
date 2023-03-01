@@ -2,6 +2,7 @@
 
 
 all:
+	@mkdir /home/eleotard/data
 	@mkdir /home/eleotard/data/mariadb
 	@mkdir /home/eleotard/data/wordpress
 	docker-compose -f srcs/docker-compose.yml up
@@ -24,8 +25,7 @@ clean:
 	docker-compose -f srcs/docker-compose.yml rm
 	docker rmi srcs_nginx:latest
 	docker rmi srcs_mariadb:latest
-	rm -rf /home/eleotard/data/mariadb
-	rm-rf /home/eleotard/data/wordpress
+	rm -rf /Users/eleotard/data
 	#docker rmi ${imgs}
 
 cnginx:
