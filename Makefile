@@ -34,6 +34,7 @@ cnginx:
 	docker rmi srcs_nginx
 
 cmdb:
+	docker stop mariadb
 	docker rm mariadb
 	docker rmi srcs_mariadb
 cwp:

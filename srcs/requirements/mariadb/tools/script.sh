@@ -1,19 +1,20 @@
 #!/bin/sh
 
 
-if [ -d /run/mysql ]; then
-	chown -R mysql:mysql /run/mysql
+if [ -d /run/mysqld ]; then
+	chown -R mysql:mysql /run/mysqld
 else
-	mkdir -p /run/mysql
-	chown -R mysql:mysql /run/mysql
+	mkdir -p /run/mysqld
+	chown -R mysql:mysql /run/mysqld
 fi
 		
 
-if [ -d /var/lib/mysql/mysql ]; then
-	chown -R mysql:mysql var/lib/mysql
+if [ -d /usr/var/lib/mysql/mysql ]; then
+	chown -R mysql:mysql /usr/var/lib/mysql
 
 else
-	mysql_install_db --user=mysql --ldata=var/lib/mysql > /dev/null
+	mysql_install_db --user=mysql --ldata=/usr/var/lib/mysql > /dev/null
+	chown -R mysql:mysql /usr/var/lib/mysql
 fi
 
 #USE mysql
