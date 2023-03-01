@@ -25,10 +25,11 @@ clean:
 	docker rmi srcs_nginx:latest
 	docker rmi srcs_mariadb:latest
 	rm -rf /home/eleotard/data/mariadb
-	rm-rf /home/eleotard/data/wordpress
+	rm -rf /home/eleotard/data/wordpress
 	#docker rmi ${imgs}
 
 cnginx:
+	docker stop nginx
 	docker rm nginx
 	docker rmi srcs_nginx
 

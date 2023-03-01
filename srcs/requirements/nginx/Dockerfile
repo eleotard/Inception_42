@@ -1,7 +1,5 @@
 FROM	alpine:3.16
 
-#INSTALLER NGINX ET OPENSSL FOR LE CERTIFICAT HTTPS
-
 RUN	apk update; \
 	apk add --no-cache nginx openssl; \
 	rm -rf /var/cache/apk/*
@@ -13,8 +11,9 @@ RUN	mkdir -p /var/www/html
 	
 RUN 	chmod 755 /var/www/html; \
  	chown -R nginx:nginx /var/lib/nginx; \
-	chown -R nginx:nginx /var/www/html 
-
+	chown -R nginx:nginx /var/www/html; \ 
+	mkdir /etc/nginx/snippets ;\
+	cp /etc/nginx/fastcgi_params /etc/nginx/snippets/fastcgi-php.conf
 
 
 #IMPORTER LA CONFIG NGINX		
