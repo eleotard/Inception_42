@@ -5,18 +5,16 @@ RUN	apt update -y; \
 	apt-get intall dialog -y; \
 	DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y
 
-#RUN	mkdir /scripts/; \
+RUN	mkdir /scripts/ 
 #	mkdir /run/mysqld; \
 #	chmod -R 777 /run/mysqld; \
 #	chmod -R 777 /var/lib/mysql
 
-#COPY	conf/my.cnf /etc/my.cnf
-#COPY	tools/script.sh /scripts/script.sh
-#COPY	tools/s.sh /scripts/s.sh
+COPY	conf/my.cnf /etc/my.cnf
+COPY	tools/script.sh /scripts/script.sh
 
-#RUN	chmod +x /scripts/script.sh
-#RUN	chmod +x /scripts/s.sh
+RUN	chmod +x /scripts/script.sh
 
-#ENTRYPOINT ["sh", "/scripts/script.sh"]
+ENTRYPOINT ["sh", "/scripts/script.sh"]
 
 

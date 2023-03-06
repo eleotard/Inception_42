@@ -2,8 +2,8 @@
 
 
 all:
-	@mkdir /home/eleotard/data/mariadb
-	@mkdir /home/eleotard/data/wordpress
+	@mkdir -p /home/eleotard/data/mariadb
+	@mkdir -p /home/eleotard/data/wordpress
 	docker-compose -f srcs/docker-compose.yml up
 
 nginx:
