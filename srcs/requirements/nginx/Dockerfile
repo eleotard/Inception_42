@@ -1,20 +1,13 @@
-FROM	alpine:3.16
+FROM	debian:buster
 
-RUN	apk update; \
-	apk add --no-cache nginx openssl; \
-	rm -rf /var/cache/apk/*
+RUN	apt update && apt upgrade -y; \
+	apt-get install nginx -y; \
+	apt-get install openssl -y 
 	
 RUN 	mkdir -p /etc/nginx/ssl; \
 	openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/OU=42/CN=eleotard.42.fr/UID=eleotard"
-
-RUN	mkdir -p /var/www/html
 	
 RUN 	chmod 755 /var/www/html; \
- 	chown -R nginx:nginx /var/lib/nginx; \
-	chown -R nginx:nginx /var/www/html; \ 
-	mkdir /etc/nginx/snippets ;\
-	cp /etc/nginx/fastcgi_params /etc/nginx/snippets/fastcgi-php.conf
-
 
 #IMPORTER LA CONFIG NGINX		
 

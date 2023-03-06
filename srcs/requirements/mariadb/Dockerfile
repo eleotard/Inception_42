@@ -1,16 +1,22 @@
-FROM	alpine:3.16
+FROM	debian:buster
 
-RUN	apk update; \
-	apk add --no-cache openrc mariadb mariadb-client mariadb-server-utils; \
-	rm -rf /var/cache/apk/*
+RUN	apt update -y; \
+	apt upgrade -y; \
+	apt-get intall dialog -y; \
+	DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y
 
-RUN	mkdir -p /scripts/
+#RUN	mkdir /scripts/; \
+#	mkdir /run/mysqld; \
+#	chmod -R 777 /run/mysqld; \
+#	chmod -R 777 /var/lib/mysql
 
-COPY	conf/my.cnf /etc/my.cnf
-COPY	tools/script.sh /scripts/script.sh
+#COPY	conf/my.cnf /etc/my.cnf
+#COPY	tools/script.sh /scripts/script.sh
+#COPY	tools/s.sh /scripts/s.sh
 
-RUN	chmod +x /scripts/script.sh
+#RUN	chmod +x /scripts/script.sh
+#RUN	chmod +x /scripts/s.sh
 
-ENTRYPOINT ["sh", "/scripts/script.sh"]
+#ENTRYPOINT ["sh", "/scripts/script.sh"]
 
 
